@@ -11,4 +11,7 @@ public interface UserDao {
 
 	@Select("select * from s_user where id = #{id}")
 	public User getById(@Param("id") long id);
+	
+	@Select("update s_user set password = #{password} where id = #{id}")
+	public User update(User toBeUpdate);
 }
