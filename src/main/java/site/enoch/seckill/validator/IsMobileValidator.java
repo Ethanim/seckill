@@ -1,7 +1,5 @@
 package site.enoch.seckill.validator;
 
-import java.lang.annotation.Annotation;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

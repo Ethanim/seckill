@@ -2,8 +2,6 @@ package site.enoch.seckill.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,20 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import site.enoch.seckill.entity.User;
-import site.enoch.seckill.redis.RedisService;
 import site.enoch.seckill.service.GoodsService;
-import site.enoch.seckill.service.UserService;
 import site.enoch.seckill.vo.GoodsVo;
 
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
-	
-	@Autowired
-	private UserService UserService;
-	
-	@Autowired
-	private RedisService redisService;
 	
 	@Autowired
 	private GoodsService goodsService;
