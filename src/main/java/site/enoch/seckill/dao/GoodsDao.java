@@ -20,6 +20,6 @@ public interface GoodsDao {
 			+ "from s_goods sg left join goods g on sg.goods_id=g.id where g.id = #{goodsId}")
 	public GoodsVo getGoodsVoByGoodsId(@Param("goodsId") long goodsId);
 
-	@Update("update s_goods set stock_count = stock_count - 1 where goods_id = #{goodsId}")
+	@Update("update s_goods set stock_count = stock_count - 1 where goods_id = #{goodsId} and stock_count > 0")
 	public void reduceStock(@Param("goodsId") long goodsId);
 }

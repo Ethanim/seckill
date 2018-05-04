@@ -9,6 +9,8 @@ import site.enoch.seckill.dao.OrderDao;
 import site.enoch.seckill.entity.OrderInfo;
 import site.enoch.seckill.entity.SeckillOrder;
 import site.enoch.seckill.entity.User;
+import site.enoch.seckill.redis.OrderKey;
+import site.enoch.seckill.redis.RedisService;
 import site.enoch.seckill.vo.GoodsVo;
 
 @Service
@@ -16,9 +18,13 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private RedisService redisService;
 
 	public SeckillOrder getSeckillOrderByUserIdGoodsId(Long userId, long goodsId) {
-		return orderDao.getSeckillOrderByUserIdGoodsId(userId, goodsId);
+		//return orderDao.getSeckillOrderByUserIdGoodsId(userId, goodsId);
+		return redisService.get(OrderKey.getSeckillOrderByUidGid, ""+userId+"_"+goodsId, SeckillOrder.class);
 	}
 
 	public OrderInfo createOrder(User user, GoodsVo goods) {
@@ -43,7 +49,14 @@ public class OrderService {
 		
 		orderDao.insertSeckillOrder(seckillOrder);
 		
+		//放入 Redis
+		redisService.set(OrderKey.getSeckillOrderByUidGid, ""+user.getId()+"_"+goods.getId(), seckillOrder);
+
 		return orderInfo;
+	}
+
+	public OrderInfo getOrderById(long orderId) {
+		return orderDao.getOrderById(orderId);
 	}
 
 
