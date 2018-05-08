@@ -81,11 +81,13 @@
 		</dependency>
 
 		<!--排除 tomcat -->
-		<!-- <dependency>
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-tomcat</artifactId> 
+			<scope>provided</scope> </dependency> -->
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency> -->
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
 
 	</dependencies>
 

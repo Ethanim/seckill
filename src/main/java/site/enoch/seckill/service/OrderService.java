@@ -40,11 +40,11 @@ public class OrderService {
 		orderInfo.setStatus(0);//0未支付
 		orderInfo.setUserId(user.getId());
 		
-		long orderId = orderDao.insert(orderInfo);
+		orderDao.insert(orderInfo);
 		
 		SeckillOrder seckillOrder = new SeckillOrder();
 		seckillOrder.setGoodsId(goods.getId());
-		seckillOrder.setOrderId(orderId);
+		seckillOrder.setOrderId(orderInfo.getId());
 		seckillOrder.setUserId(user.getId());
 		
 		orderDao.insertSeckillOrder(seckillOrder);
@@ -57,6 +57,11 @@ public class OrderService {
 
 	public OrderInfo getOrderById(long orderId) {
 		return orderDao.getOrderById(orderId);
+	}
+
+	public void deleteOrders() {
+		orderDao.deleteOrders();
+		orderDao.deleteSeckillOrders();
 	}
 
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import site.enoch.seckill.entity.SeckillGoods;
 import site.enoch.seckill.vo.GoodsVo;
 
 @Mapper
@@ -21,5 +22,8 @@ public interface GoodsDao {
 	public GoodsVo getGoodsVoByGoodsId(@Param("goodsId") long goodsId);
 
 	@Update("update s_goods set stock_count = stock_count - 1 where goods_id = #{goodsId} and stock_count > 0")
-	public void reduceStock(@Param("goodsId") long goodsId);
+	public int reduceStock(@Param("goodsId") long goodsId);
+
+	@Update("update s_goods set stock_count = #{stockCount} where goods_id = #{goodsId}")
+	public void resetStock(SeckillGoods g);
 }
