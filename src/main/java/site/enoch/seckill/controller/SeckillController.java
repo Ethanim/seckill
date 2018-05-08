@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import site.enoch.seckill.access.AccessLimit;
 import site.enoch.seckill.entity.SeckillOrder;
 import site.enoch.seckill.entity.User;
 import site.enoch.seckill.rabbitmq.MQSender;
@@ -167,6 +168,7 @@ public class SeckillController implements  InitializingBean{
 		return Result.success(true);
 	}
 	
+	@AccessLimit(seconds=5, maxCount=5, needLogin=true)
 	@RequestMapping(value="/path", method=RequestMethod.GET)
 	@ResponseBody
 	public Result<String> getSeckillPath(HttpServletRequest request, User user, @RequestParam("goodsId") long goodsId,
