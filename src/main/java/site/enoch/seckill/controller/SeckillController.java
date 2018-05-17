@@ -35,6 +35,11 @@ import site.enoch.seckill.service.OrderService;
 import site.enoch.seckill.service.SeckillService;
 import site.enoch.seckill.vo.GoodsVo;
 
+/**
+ * 
+ * @author Administrator
+ *
+ */
 @Controller
 @RequestMapping("/seckill")
 public class SeckillController implements  InitializingBean{
@@ -107,7 +112,8 @@ public class SeckillController implements  InitializingBean{
 		sm.setUser(user);
 		sm.setGoodsId(goodsId);
 		sender.sendSeckillMessage(sm);
-		return Result.success(0);//排队中
+		//排队中
+		return Result.success(0);
 		
 		/*//判断库存
 		GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
